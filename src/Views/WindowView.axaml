@@ -1,0 +1,42 @@
+<suki:SukiWindow xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:suki="https://github.com/kikipoulet/SukiUI"
+    xmlns:vm="using:QuickQR.ViewModels"
+    x:Class="QuickQR.Views.WindowView"
+    x:DataType="vm:WindowViewModel"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    Icon="/src/Assets/logo.ico"
+    Title="QuickQR"
+    CanMinimize="True"
+    CanMaximize="True"
+    CanMove="True"
+    CanResize="True"
+    IsTitleBarVisible="True"
+    ShowBottomBorder="True"
+    ShowTitlebarBackground="True">
+
+    <suki:SukiWindow.Hosts>
+        <suki:SukiToastHost Manager="{Binding ToastManager}" />
+        <suki:SukiDialogHost Manager="{Binding DialogManager}" />
+    </suki:SukiWindow.Hosts>
+
+    <suki:SukiWindow.LogoContent>
+        <Image Width="22" Height="22" VerticalAlignment="Center"
+               RenderOptions.BitmapInterpolationMode="HighQuality"
+               Source="/src/Assets/logo.ico" />
+    </suki:SukiWindow.LogoContent>
+
+    <Panel Background="Transparent">
+        <TransitioningContentControl Content="{Binding CurrentViewModel}">
+            <TransitioningContentControl.PageTransition>
+                <PageSlide Duration="0:0:0.25" 
+                        Orientation="Vertical" 
+                        SlideInEasing="QuadraticEaseOut" 
+                        SlideOutEasing="QuadraticEaseIn" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
+    </Panel>
+
+</suki:SukiWindow>
