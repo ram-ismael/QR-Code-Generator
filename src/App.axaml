@@ -1,0 +1,17 @@
+<Application xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:suki="https://github.com/kikipoulet/SukiUI"
+    xmlns:mIcon="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    x:Class="QuickQR.App"
+    xmlns:configs="using:QuickQR.Configs"
+    RequestedThemeVariant="Default">
+
+    <Application.DataTemplates>
+        <configs:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <suki:SukiTheme Locale="en-US" ThemeColor="Blue" />
+        <mIcon:MaterialIconStyles />
+    </Application.Styles>
+</Application>

@@ -59,7 +59,7 @@
               "target": "Package",
               "version": "[12.1.0, )"
             },
-            "Avalonia.Themes.Fluent": {
+            "Avalonia.Skia": {
               "target": "Package",
               "version": "[12.1.0, )"
             },
@@ -70,6 +70,22 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.4.2, )"
+            },
+            "Material.Icons.Avalonia": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "SukiUI": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "SukiUI.Dock": {
+              "target": "Package",
+              "version": "[7.0.1, )"
             }
           },
           "imports": [
