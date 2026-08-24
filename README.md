@@ -1,56 +1,38 @@
-# QuickQR
+<p align="center">
+  <img src="docs/logo.png" alt="QuickQR Logo" width="140" height="140" />
+</p>
 
-A lightweight and modern QR code generator built with **.NET** and **Avalonia UI**.
+<h1 align="center">QuickQR ⚡</h1>
 
-QuickQR aims to provide a simple desktop experience for creating QR codes quickly and efficiently, with a clean interface and a structure designed for future expansion.
+<p align="center">
+  <b>Gerador de QR Code Desktop Rápido, Elegante e Sem Dependências</b>
+</p>
 
-> 🚧 **Project status:** Early development. The main application window is currently being built, and the QR generation features and UI elements are being implemented incrementally.
+<p align="center">
+  <a href="https://github.com/ramadanismael/QuickQR"><img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-brightgreen.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/framework-AvaloniaUI%20%2B%20SukiUI-purple.svg" alt="Framework">
+  <img src="https://img.shields.io/badge/license-MIT-orange.svg" alt="License">
+</p>
 
-## Features
+---
 
-* Generate QR codes from user-provided content
-* Clean and modern desktop interface
-* Cross-platform desktop support through Avalonia UI
-* Lightweight and easy to use
-* Designed for future customization and additional QR-related features
+**QuickQR** é uma aplicação desktop moderna, leve e ultra-rápida desenvolvida para geração instantânea de códigos QR a partir de qualquer texto ou URL.
 
-## Tech Stack
+Construída com **Avalonia UI**, **SukiUI** e **.NET**, a aplicação oferece um visual elegante em Dark Mode, preview em tempo real e exportação direta em alta resolução.
 
-* **C#**
-* **.NET**
-* **Avalonia UI**
-* **XAML**
+---
 
-## Project Structure
+## 📸 Demonstração
 
-The project follows a source-based structure to keep the application organized and maintainable.
+<p align="center">
+  <img src="docs/screenapp.png" alt="QuickQR Interface Preview" width="100%" />
+</p>
 
-```text
-QuickQR/
-├── src/
-│   ├── ...
-├── .editorconfig
-├── .gitignore
-├── QuickQR.csproj
-└── README.md
-```
+---
 
-The `src/` directory contains the application's source code, views, models, services, and other components.
-
-## Getting Started
-
-### Prerequisites
-
-Make sure you have the **.NET SDK** installed.
-
-You can verify your installation with:
-
-```bash
-dotnet --version
-```
-
-### Clone the repository
-
+## 🚀 Download & Execução (Zero Dependências!)
+Você **não precisa instalar o .NET SDK, dependências ou runtimes** para usar o QuickQR. O aplicativo foi compilado como **Standalone / Self-Contained**, ou seja, tudo o que ele precisa para rodar já está empacotado no próprio executável!
 ```bash
 git clone https://github.com/<ram-ismael>/QuickQR.git
 cd QuickQR
@@ -62,72 +44,100 @@ cd QuickQR
 dotnet restore
 ```
 
-### Run the application
+### 📥 Binários Prontos (`v1.0.0`)
 
-```bash
-dotnet run
+Os executáveis já estão prontos dentro da pasta `publish/` do repositório ou nas Releases:
+
+* **🪟 Windows (`win-x64`)**:
+  * Acesse a pasta `publish/win-x64/`.
+  * Clique duas vezes no arquivo `QuickQR.exe` para rodar imediatamente.
+
+* **🐧 Linux (`linux-x64`)**:
+  * Acesse a pasta `publish/linux-x64/`.
+  * Dê permissão de execução (se necessário) e rode:
+    ```bash
+    chmod +x QuickQR
+    ./QuickQR
+    ```
+
+---
+
+## ✨ Funcionalidades
+
+* ⚡ **Geração Instantânea & Live Preview**: Veja o QR Code sendo atualizado e renderizado em tempo real no painel lateral enquanto você digita.
+* 🎛️ **Controle de Correção de Erros (Error Correction)**: Escolha entre os níveis de tolerância a falhas (*Low*, *Medium*, *Quartile*, *High*).
+* 📏 **Ajuste Dinâmico de Tamanho (Module Size)**: Defina a resolução e dimensão dos módulos do código QR em tempo real através do slider.
+* 💾 **Exportação em PNG**: Exporte o QR Code gerado em alta definição no formato `.png` com apenas um clique.
+* 🎨 **Interface Moderna (SukiUI)**: Design limpo, responsivo e adaptado com tema escuro elegante.
+* 📊 **Métricas do Código**: Exibe a contagem exata de caracteres inseridos e o tamanho final da imagem gerada em pixels (ex: `17 character(s), 396x396px`).
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* **Linguagem**: C# (.NET Core)
+* **UI Framework**: [Avalonia UI](https://avaloniaui.net/) (Cross-platform UI)
+* **Design System**: [SukiUI](https://github.com/kikipoulet/SukiUI) (Modern UI Controls & Themes)
+* **Arquitetura**: MVVM (Model-View-ViewModel)
+
+---
+
+## 📁 Estrutura do Projeto
+
+```text
+QuickQR/
+├── docs/                # Documentação e imagens (logo.png, screenapp.png)
+├── publish/             # Binários prontos para uso (Self-contained)
+│   ├── linux-x64/       # Executável para Linux
+│   └── win-x64/         # Executável para Windows
+├── src/
+│   ├── Assets/          # Ícones e recursos visuais (logo.ico)
+│   ├── Configs/         # Configurações de UI, SukiViews e base MVVM
+│   ├── Services/        # Lógica de geração de QR Code (IQrCodeService)
+│   ├── ViewModels/      # ViewModels (QrGeneratorViewModel, WindowViewModel)
+│   └── Views/           # Interfaces XAML (QrGeneratorView, WindowView)
+├── QuickQR.csproj       # Arquivo de projeto .NET
+└── README.md
 ```
 
-## Development
+---
 
-QuickQR is being developed with a focus on a clean separation between the UI and application logic.
+## 💻 Compilando a partir do Código Fonte (Desenvolvedores)
 
-The interface is built with **Avalonia XAML**, while the application logic is implemented in **C#**.
+Se você for um desenvolvedor e desejar alterar o código fonte ou gerar uma nova build, você precisará do **.NET SDK** instalado.
 
-As development progresses, the project will include additional components for QR generation, customization, exporting, and other related functionality.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/ramadanismael/QuickQR.git
+   cd QuickQR
+   ```
 
-## Roadmap
+2. Restaure as dependências e compile o projeto:
+   ```bash
+   dotnet restore
+   dotnet build
+   ```
 
-* [x] Initialize Avalonia desktop application
-* [x] Restructure project architecture
-* [x] Create the main application window
-* [ ] Add QR code generation
-* [ ] Add input controls
-* [ ] Add QR preview
-* [ ] Add QR customization options
-* [ ] Add image export
-* [ ] Improve accessibility and UX
-* [ ] Add additional QR formats and options
-* [ ] Release the first stable version
+3. Execute a aplicação:
+   ```bash
+   dotnet run --project QuickQR.csproj
+   ```
 
-## Contributing
+4. Para publicar novos executáveis Standalone (Zero-Dependency):
+   ```bash
+   # Windows 64-bit
+   dotnet publish -c Release -r win-x64 --self-contained
 
-Contributions are welcome.
+   # Linux 64-bit
+   dotnet publish -c Release -r linux-x64 --self-contained
+   ```
 
-To contribute:
+---
 
-1. Fork the repository.
-2. Create a new branch:
+## 📄 Licença
 
-```bash
-git checkout -b feature/your-feature
-```
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-3. Make your changes.
-4. Commit your changes:
+---
 
-```bash
-git commit -m "feat: add your feature"
-```
-
-5. Push your branch:
-
-```bash
-git push origin feature/your-feature
-```
-
-6. Open a Pull Request.
-
-Please keep changes focused and follow the existing project structure and coding conventions.
-
-## License
-
-This project is licensed under the **MIT License**.
-
-See the `LICENSE` file for more information.
-
-## Author
-
-**Ramadan Ismael**
-
-Built with ❤️ using **C#**, **.NET**, and **Avalonia UI**.
+Built with ❤️ using .NET.
