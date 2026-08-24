@@ -32,8 +32,17 @@ Construída com **Avalonia UI**, **SukiUI** e **.NET**, a aplicação oferece um
 ---
 
 ## 🚀 Download & Execução (Zero Dependências!)
-
 Você **não precisa instalar o .NET SDK, dependências ou runtimes** para usar o QuickQR. O aplicativo foi compilado como **Standalone / Self-Contained**, ou seja, tudo o que ele precisa para rodar já está empacotado no próprio executável!
+```bash
+git clone https://github.com/<ram-ismael>/QuickQR.git
+cd QuickQR
+```
+
+### Restore dependencies
+
+```bash
+dotnet restore
+```
 
 ### 📥 Binários Prontos (`v1.0.0`)
 
