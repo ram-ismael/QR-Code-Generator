@@ -34,5 +34,6 @@
     <PackageReference Include="SukiUI" Version="7.0.1" />
     <PackageReference Include="SukiUI.Dock" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+    <PackageReference Include="QRCoder" Version="1.8.0" />
   </ItemGroup>
 </Project>

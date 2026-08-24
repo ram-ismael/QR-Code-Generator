@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using QuickQR.Configs;
+using QuickQR.Services;
 using QuickQR.ViewModels;
 using QuickQR.Views;
 using SukiUI.Dialogs;
@@ -26,7 +27,15 @@ public partial class App : Application
             services.AddSingleton(desktop);
             var views = ConfigureViews(services);
             var provider = ConfigureServices(services);
-            desktop.MainWindow = views.CreateView<WindowViewModel>(provider) as Window;
+
+            var mainWindow = views.CreateView<WindowViewModel>(provider) as Window;
+            desktop.MainWindow = mainWindow;
+
+            // MVP has a single page, so wire it up directly as the window's content.
+            if (mainWindow?.DataContext is WindowViewModel windowViewModel)
+            {
+                windowViewModel.CurrentViewModel = provider.GetRequiredService<QrGeneratorViewModel>();
+            }
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -37,13 +46,15 @@ public partial class App : Application
         return new SukiViews()
 
             // Add main view
-            .AddView<WindowView, WindowViewModel>(services);
+            .AddView<WindowView, WindowViewModel>(services)
+            .AddView<QrGeneratorView, QrGeneratorViewModel>(services);
     }
 
     private static ServiceProvider ConfigureServices(ServiceCollection services)
     {        
         services.AddSingleton<ISukiToastManager, SukiToastManager>();
         services.AddSingleton<ISukiDialogManager, SukiDialogManager>();
+        services.AddSingleton<IQrCodeService, QrCodeService>();
 
         return services.BuildServiceProvider();
     }

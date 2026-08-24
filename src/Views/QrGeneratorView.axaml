@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:suki="https://github.com/kikipoulet/SukiUI"
+    xmlns:vm="using:QuickQR.ViewModels"
+    x:Class="QuickQR.Views.QrGeneratorView"
+    x:DataType="vm:QrGeneratorViewModel"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500">
+
+    <Grid ColumnDefinitions="*,320" Margin="24" ColumnSpacing="24">
+
+        <!-- Left: input & options -->
+        <StackPanel Grid.Column="0" Spacing="16">
+
+            <TextBlock Text="QuickQR" FontSize="26" FontWeight="Bold" />
+            <TextBlock Text="Generate a QR code from any text or URL." Opacity="0.7" />
+
+            <TextBox Text="{Binding InputText}"
+                     PlaceholderText="Type or paste text / a URL..."
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="120" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                <StackPanel Grid.Column="0" Spacing="4">
+                    <TextBlock Text="Error correction" Opacity="0.7" FontSize="12" />
+                    <ComboBox ItemsSource="{Binding EccLevels}"
+                              SelectedItem="{Binding SelectedEccLevel}"
+                              HorizontalAlignment="Stretch" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Spacing="4">
+                    <TextBlock Text="{Binding ModuleSize, StringFormat='Module size: {0:0}px'}" Opacity="0.7" FontSize="12" />
+                    <Slider Minimum="4" Maximum="30" Value="{Binding ModuleSize}" />
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Text="{Binding StatusMessage}"
+                       TextWrapping="Wrap"
+                       IsVisible="{Binding !HasError}"
+                       Opacity="0.7" />
+            <TextBlock Text="{Binding StatusMessage}"
+                       TextWrapping="Wrap"
+                       IsVisible="{Binding HasError}"
+                       Foreground="IndianRed" />
+
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button Content="Generate" Command="{Binding GenerateCommand}" Classes="Flat Accent" />
+                <Button Content="Save as PNG..." Command="{Binding SaveAsPngCommand}" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Right: preview -->
+        <suki:GlassCard Grid.Column="1" CornerRadius="12">
+            <Grid RowDefinitions="*,Auto">
+                <Border Grid.Row="0"
+                        Background="White"
+                        CornerRadius="8"
+                        Margin="16"
+                        Padding="16"
+                        MinHeight="220">
+                    <Image Source="{Binding QrImage}"
+                           Stretch="Uniform"
+                           RenderOptions.BitmapInterpolationMode="HighQuality" />
+                </Border>
+                <TextBlock Grid.Row="1"
+                           Text="Live preview"
+                           HorizontalAlignment="Center"
+                           Opacity="0.6"
+                           Margin="0,0,0,12" />
+            </Grid>
+        </suki:GlassCard>
+    </Grid>
+</UserControl>
