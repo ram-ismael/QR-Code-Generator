@@ -26,7 +26,7 @@ Construída com **Avalonia UI**, **SukiUI** e **.NET**, a aplicação oferece um
 ## 📸 Demonstração
 
 <p align="center">
-  <img src="docs/screenapp.png" alt="QuickQR Interface Preview" width="100%" />
+  <img src="docs/screen_app.png" alt="QuickQR Interface Preview" width="100%" />
 </p>
 
 ---
