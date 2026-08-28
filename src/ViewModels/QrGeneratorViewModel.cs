@@ -14,10 +14,10 @@ using SukiUI.Toasts;
 
 namespace QuickQR.ViewModels;
 
-public partial class QrGeneratorViewModel : ViewModelBase
+public partial class QrGeneratorViewModel(IQrCodeService qrCodeService, ISukiToastManager toastManager) : ViewModelBase
 {
-    private readonly IQrCodeService _qrCodeService;
-    private readonly ISukiToastManager _toastManager;
+    private readonly IQrCodeService _qrCodeService = qrCodeService;
+    private readonly ISukiToastManager _toastManager = toastManager;
 
     private CancellationTokenSource? _debounceCts;
     private byte[]? _lastPngBytes;
@@ -47,12 +47,6 @@ public partial class QrGeneratorViewModel : ViewModelBase
 
     [ObservableProperty]
     private double _moduleSize = 12;
-
-    public QrGeneratorViewModel(IQrCodeService qrCodeService, ISukiToastManager toastManager)
-    {
-        _qrCodeService = qrCodeService;
-        _toastManager = toastManager;
-    }
 
     partial void OnInputTextChanged(string value) => QueueGenerate();
 
@@ -135,12 +129,14 @@ public partial class QrGeneratorViewModel : ViewModelBase
         }
     }
 
-    private bool CanSaveAsPng() => _lastPngBytes is not null;
+    private const int ExportPixelsPerModule = 40; // ~ resolução alta para exportação
+
+    private bool CanSaveAsPng() => !string.IsNullOrWhiteSpace(InputText) && !HasError;
 
     [RelayCommand(CanExecute = nameof(CanSaveAsPng))]
     private async Task SaveAsPngAsync()
     {
-        if (_lastPngBytes is null)
+        if (string.IsNullOrWhiteSpace(InputText))
         {
             return;
         }
@@ -154,7 +150,7 @@ public partial class QrGeneratorViewModel : ViewModelBase
         var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
         {
             Title = "Save QR Code",
-            SuggestedFileName = "qrcode.png",
+            SuggestedFileName = "quick_qr_code.png",
             DefaultExtension = "png",
             FileTypeChoices =
             [
@@ -169,13 +165,18 @@ public partial class QrGeneratorViewModel : ViewModelBase
 
         try
         {
+            // Gera uma versão de alta resolução separada do preview, em vez de reaproveitar _lastPngBytes
+            var highResPngBytes = _qrCodeService.GeneratePng(InputText, SelectedEccLevel, ExportPixelsPerModule);
+
             await using var stream = await file.OpenWriteAsync();
-            await stream.WriteAsync(_lastPngBytes);
+            await stream.WriteAsync(highResPngBytes);
 
             _toastManager.CreateToast()
                 .WithTitle("Saved")
                 .WithContent($"QR code saved to {file.Name}")
                 .OfType(NotificationType.Success)
+                .Dismiss().After(TimeSpan.FromSeconds(5))
+                .Dismiss().ByClicking()
                 .Queue();
         }
         catch (Exception ex)
@@ -184,6 +185,8 @@ public partial class QrGeneratorViewModel : ViewModelBase
                 .WithTitle("Save failed")
                 .WithContent(ex.Message)
                 .OfType(NotificationType.Error)
+                .Dismiss().After(TimeSpan.FromSeconds(5))
+                .Dismiss().ByClicking()
                 .Queue();
         }
     }

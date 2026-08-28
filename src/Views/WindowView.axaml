@@ -7,10 +7,12 @@
     x:Class="QuickQR.Views.WindowView"
     x:DataType="vm:WindowViewModel"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    Width="770"
+    Height="390"
     Icon="/src/Assets/logo.ico"
     Title="QuickQR"
     CanMinimize="True"
-    CanMaximize="True"
+    CanMaximize="False"
     CanMove="True"
     CanResize="True"
     IsTitleBarVisible="True"
@@ -19,7 +21,6 @@
 
     <suki:SukiWindow.Hosts>
         <suki:SukiToastHost Manager="{Binding ToastManager}" />
-        <suki:SukiDialogHost Manager="{Binding DialogManager}" />
     </suki:SukiWindow.Hosts>
 
     <suki:SukiWindow.LogoContent>
