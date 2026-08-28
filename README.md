@@ -65,14 +65,14 @@ cd QuickQR-Code-Generator
 
 ### 📥 Ready-to-Run Binaries (`v1.0.0`)
 
-The executables are already available inside the `publish/` folder of the repository, or in the [Releases](https://github.com/ram-ismael/QuickQR-Code-Generator/releases):
+Head to the `apps/` folder, grab the zip for your OS, extract it, and launch the app. You'll find them in the repository or in the [Releases](https://github.com/ram-ismael/QuickQR-Code-Generator/releases).
 
 * **🪟 Windows (`win-x64`)**
-  * Go to the `publish/win-x64/` folder.
+  * Download and extract `apps/win-x64.zip`.
   * Double-click `QuickQR.exe` to run it immediately.
 
 * **🐧 Linux (`linux-x64`)**
-  * Go to the `publish/linux-x64/` folder.
+  * Download and extract `apps/linux-x64.zip`.
   * Grant execute permission (if needed) and run:
     ```bash
     chmod +x QuickQR
@@ -107,9 +107,9 @@ The executables are already available inside the `publish/` folder of the reposi
 ```text
 QuickQR-Code-Generator/
 ├── docs/                # Documentation and images (logo.png, screenshots, etc.)
-├── publish/             # Ready-to-use binaries (Self-contained)
-│   ├── linux-x64/       # Linux executable
-│   └── win-x64/         # Windows executable
+├── apps/                # Ready-to-run binaries (Self-contained)
+│   ├── linux-x64.zip    # Linux build (extract and run)
+│   └── win-x64.zip      # Windows build (extract and run)
 ├── src/
 │   ├── Assets/          # Icons and visual resources (logo.ico)
 │   ├── Configs/         # UI configs and base MVVM setup
@@ -178,4 +178,4 @@ This project is licensed under **MIT**. See the [LICENSE](LICENSE) file for deta
 
 ---
 
-<p align="center">Designed and developed with ❤️  by <a href="https://github.com/ram-ismael">Ramadan Ismael</a>.</p>
+<p align="center">Designed and developed with ❤️ by <a href="https://github.com/ram-ismael">Ramadan Ismael</a>.</p>
