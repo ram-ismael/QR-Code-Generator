@@ -7,7 +7,6 @@ using QuickQR.Configs;
 using QuickQR.Services;
 using QuickQR.ViewModels;
 using QuickQR.Views;
-using SukiUI.Dialogs;
 using SukiUI.Toasts;
 
 namespace QuickQR;
@@ -53,7 +52,6 @@ public partial class App : Application
     private static ServiceProvider ConfigureServices(ServiceCollection services)
     {        
         services.AddSingleton<ISukiToastManager, SukiToastManager>();
-        services.AddSingleton<ISukiDialogManager, SukiDialogManager>();
         services.AddSingleton<IQrCodeService, QrCodeService>();
 
         return services.BuildServiceProvider();
